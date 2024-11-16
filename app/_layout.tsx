@@ -8,6 +8,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useColorScheme } from "nativewind";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Splash from "@/components/Atoms/Splash";
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from "@react-navigation/native";
+import { useColorScheme as useColorSchemeRN } from "react-native";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -17,6 +23,7 @@ type theme = "light" | "dark";
 export default function RootLayout() {
   const queryClient = new QueryClient();
   const { setColorScheme } = useColorScheme();
+  const colorScheme = useColorSchemeRN();
   const [isShowSplashScreen, setIsShowSplashScreen] = useState(true);
 
   const [loaded] = useFonts({
@@ -51,17 +58,22 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {isShowSplashScreen ? (
-        <Splash />
-      ) : (
-        <Stack>
-          <Stack.Screen name="index" />
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="gif/[id]" />
-          <Stack.Screen name="search/index" options={{ headerShown: false }} />
-        </Stack>
-      )}
-      <StatusBar style="auto" />
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+        {isShowSplashScreen ? (
+          <Splash />
+        ) : (
+          <Stack>
+            <Stack.Screen name="index" />
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="gif/[id]" />
+            <Stack.Screen
+              name="search/index"
+              options={{ headerShown: false }}
+            />
+          </Stack>
+        )}
+        <StatusBar style="auto" />
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

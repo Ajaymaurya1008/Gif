@@ -12,12 +12,15 @@ import { Image } from "expo-image";
 import { GiphyGif } from "@/types/trendingDatatypes";
 import * as FileSystem from "expo-file-system";
 import { shareAsync } from "expo-sharing";
+import { Feather } from "@expo/vector-icons";
+
 
 export default function Gif() {
   const [isShareLoading, setIsShareLoading] = useState(false);
   const navigation = useNavigation();
   const params = useLocalSearchParams();
   const gif: GiphyGif = JSON.parse(params.data as string);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {
     navigation.setOptions({
@@ -73,8 +76,22 @@ export default function Gif() {
       <View className="w-full p-2 rounded-2xl items-center bg-white dark:bg-gray-700 self-start">
         <Image
           style={{ width: "100%", height: 300, borderRadius: 8 }}
-          source={{ uri: gif.images.fixed_height.url }}
+          source={{
+            uri: isPlaying
+              ? gif.images.fixed_height.url
+              : gif.images.fixed_height_still.url,
+          }}
         />
+        <TouchableOpacity
+          onPress={() => setIsPlaying(!isPlaying)}
+          className="absolute justify-center items-start bottom-4 right-4 bg-black/50 p-2 rounded-full"
+        >
+          <Feather
+            name={isPlaying ? "pause" : "play"}
+            size={24}
+            color="white"
+          />
+        </TouchableOpacity>
       </View>
       <View className="mt-8 dark:bg-gray-700 bg-white p-3 w-full rounded-lg">
         <Text className="dark:text-white text-xl font-semibold">

@@ -27,6 +27,8 @@ export interface GiphyGif {
     fixed_width: GiphyImage;
     fixed_height_small: GiphyImage;
     fixed_width_small: GiphyImage;
+    fixed_height_still: GiphyImage;
+    fixed_width_still: GiphyImage;
     preview: {
       height: string;
       width: string;
