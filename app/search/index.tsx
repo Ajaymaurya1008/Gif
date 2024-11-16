@@ -16,7 +16,7 @@ export default function Search() {
   }, []);
 
   const getSearchResults = async ({ pageParam = 0 }) => {
-    console.log(searchText)
+    console.log(searchText);
     const response = await api.get("/gifs/search", {
       params: {
         q: searchText,
@@ -27,26 +27,32 @@ export default function Search() {
     return response.data as GiphyResponse;
   };
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
-    useInfiniteQuery({
-      queryKey: ["searchGifs",searchText],
-      queryFn: getSearchResults,
-      getNextPageParam: (lastPage, allPages) => {
-        const nextOffset = allPages.length * 10;
-        return nextOffset < lastPage.pagination.total_count
-          ? nextOffset
-          : undefined;
-      },
-      initialPageParam: 0,
-      // staleTime: 1000 * 60 * 5,
-    });
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+    refetch,
+  } = useInfiniteQuery({
+    queryKey: ["searchGifs"],
+    queryFn: getSearchResults,
+    getNextPageParam: (lastPage, allPages) => {
+      const nextOffset = allPages.length * 10;
+      return nextOffset < lastPage.pagination.total_count
+        ? nextOffset
+        : undefined;
+    },
+    initialPageParam: 0,
+    // staleTime: 1000 * 60 * 5,
+  });
 
   const debouncedSearch = useCallback(
     debounce(() => {
       if (searchText) {
-        getSearchResults({ pageParam: 0 });
+        refetch();
       }
-    }, 500),
+    }, 800),
     [searchText]
   );
 
@@ -58,7 +64,7 @@ export default function Search() {
   return (
     <View className="bg-white dark:bg-gray-900 flex-1 items-center pt-12">
       <View className="px-6">
-        <View className="w-full flex-row bg-white mt-4 p-2 rounded-lg gap-2">
+        <View className="w-full flex-row bg-gray-100 dark:bg-white mt-4 p-2 rounded-lg gap-2">
           <Feather name="search" size={24} color="#000" />
           <TextInput
             ref={inputRef}
