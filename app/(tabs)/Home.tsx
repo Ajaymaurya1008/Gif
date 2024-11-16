@@ -5,7 +5,7 @@ import { FlashList } from "@shopify/flash-list";
 import { GiphyResponse } from "@/types/trendingDatatypes";
 import { Image } from "expo-image";
 
-export default function HomeScreen() {
+export default function Home() {
   const getTrendingGifs = async ({ pageParam = 0 }) => {
     const response = await api.get("/gifs/trending", {
       params: {
@@ -52,7 +52,7 @@ export default function HomeScreen() {
       <View className="bg-slate-800 w-full px-8 pt-12 pb-4">
         <Text className="text-white text-3xl">GIPHY</Text>
       </View>
-      <View className="flex-1 w-full pt-10 px-6">
+      <View className="flex-1 w-full pt-6 px-6">
         <View className="h-full">
           <FlashList
             data={allGifs}
@@ -66,8 +66,8 @@ export default function HomeScreen() {
                 <Image
                   style={{ width: 150, height: 150 }}
                   contentFit="cover"
-                  source={{ uri: item.images.original.url }}
-                  transition={1000}
+                  source={{ uri: item.images.fixed_height.url }}
+                  transition={500}
                 />
               </View>
             )}
