@@ -1,11 +1,14 @@
 import api from "@/services/axios";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { View, ActivityIndicator, Text } from "react-native";
+import { View, ActivityIndicator, Text, Pressable } from "react-native";
 import { FlashList } from "@shopify/flash-list";
-import { GiphyResponse } from "@/types/trendingDatatypes";
+import { GiphyGif, GiphyResponse } from "@/types/trendingDatatypes";
 import { Image } from "expo-image";
+import { useRouter } from "expo-router";
 
 export default function Home() {
+  const router = useRouter();
+
   const getTrendingGifs = async ({ pageParam = 0 }) => {
     const response = await api.get("/gifs/trending", {
       params: {
@@ -47,6 +50,16 @@ export default function Home() {
     );
   }
 
+  const navigateGif = (gif: GiphyGif) => {
+    router.push({
+      pathname: `/gif/[id]`,
+      params: {
+        id: gif.id,
+        data: JSON.stringify(gif),
+      },
+    });
+  };
+
   return (
     <View className="bg-white flex-1 items-center">
       <View className="bg-slate-800 w-full px-8 pt-12 pb-4">
@@ -62,14 +75,17 @@ export default function Home() {
             onEndReached={loadMore}
             onEndReachedThreshold={0.5}
             renderItem={({ item }) => (
-              <View className="mb-4 rounded-xl overflow-hidden self-start">
+              <Pressable
+                onPress={() => navigateGif(item)}
+                className="mb-4 rounded-xl overflow-hidden self-start"
+              >
                 <Image
                   style={{ width: 150, height: 150 }}
                   contentFit="cover"
                   source={{ uri: item.images.fixed_height.url }}
                   transition={500}
                 />
-              </View>
+              </Pressable>
             )}
             ListFooterComponent={() =>
               isFetchingNextPage ? (
