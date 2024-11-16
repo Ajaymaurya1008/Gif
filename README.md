@@ -1,6 +1,21 @@
-# Giphy App 🎭
+# Gif App 🎭
 
 A feature-rich mobile application built with Expo and React Native that allows users to browse, search, download and share GIFs from the GIPHY platform.
+
+## Media
+
+<div style="display: flex; justify-content: space-between;">
+   <img src="https://res.cloudinary.com/dfh7pmyj0/image/upload/v1731798776/Home_xfv77p.jpg" alt="Home" width="32%" />
+   <img src="https://res.cloudinary.com/dfh7pmyj0/image/upload/v1731798775/Details_y6ucir.jpg" alt="Details" width="32%" />
+   <img src="https://res.cloudinary.com/dfh7pmyj0/image/upload/v1731798776/Search_o6qrxu.jpg" alt="Search" width="32%" />
+</div>
+<div style="display: flex; justify-content: space-between;">
+   <img src="https://res.cloudinary.com/dfh7pmyj0/image/upload/v1731798776/Home-dark_kes25h.jpg" alt="Home dark" width="32%" />
+   <img src="https://res.cloudinary.com/dfh7pmyj0/image/upload/v1731798775/Details-dark_ygbbnl.jpg" alt="Details dark" width="32%" />
+   <img src="https://res.cloudinary.com/dfh7pmyj0/image/upload/v1731798776/Search-dark_jewapd.jpg" alt="Search dark" width="32%" />
+</div>
+
+[Video](https://github.com/user-attachments/assets/dfebc793-f875-4ccb-98a7-c5d1f5b72e00)
 
 ## Features ✨
 
