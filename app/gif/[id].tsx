@@ -69,20 +69,22 @@ export default function Gif() {
   };
 
   return (
-    <View className="bg-gray-300 flex-1 items-center pt-8 px-6">
-      <View className="w-full p-2 rounded-2xl items-center bg-white self-start">
+    <View className="bg-gray-300 dark:bg-gray-900 flex-1 items-center pt-8 px-6">
+      <View className="w-full p-2 rounded-2xl items-center bg-white dark:bg-gray-700 self-start">
         <Image
           style={{ width: "100%", height: 300, borderRadius: 8 }}
           source={{ uri: gif.images.fixed_height.url }}
         />
       </View>
-      <View className="mt-8 bg-white p-3 w-full rounded-lg">
-        <Text className="text-xl font-semibold">{gif.title}</Text>
+      <View className="mt-8 dark:bg-gray-700 bg-white p-3 w-full rounded-lg">
+        <Text className="dark:text-white text-xl font-semibold">
+          {gif.title}
+        </Text>
       </View>
       <View className="flex-row items-center mt-8 gap-4">
         <TouchableOpacity
           onPress={downloadGif}
-          className="grow bg-white p-2 rounded-lg flex-row gap-2 items-center"
+          className="grow dark:bg-gray-700 bg-white p-2 rounded-lg flex-row gap-2 items-center"
         >
           <Image
             style={{ width: 30, height: 30 }}
@@ -90,12 +92,14 @@ export default function Gif() {
               uri: "https://cdn-icons-png.flaticon.com/512/9797/9797374.png",
             }}
           />
-          <Text className="text-lg font-semibold">Download</Text>
+          <Text className="text-lg dark:text-white font-semibold">
+            Download
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           disabled={isShareLoading}
           onPress={shareGif}
-          className="grow bg-white p-2 rounded-lg flex-row gap-2 items-center"
+          className="grow bg-white dark:bg-gray-700 p-2 rounded-lg flex-row gap-2 items-center"
         >
           {isShareLoading ? (
             <ActivityIndicator size={30} />
@@ -107,7 +111,7 @@ export default function Gif() {
               }}
             />
           )}
-          <Text className="text-lg font-semibold">Share</Text>
+          <Text className="text-lg dark:text-white font-semibold">Share</Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -10,14 +10,17 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import "@/styles/global.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useColorScheme } from "@/hooks/useColorScheme";
+import { useColorScheme } from "nativewind";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
+type theme = "light" | "dark";
+
 export default function RootLayout() {
   const queryClient = new QueryClient();
-  const colorScheme = useColorScheme();
+  const { colorScheme, setColorScheme } = useColorScheme();
 
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
@@ -28,6 +31,16 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
     }
   }, [loaded]);
+
+  useEffect(() => {
+    const loadTheme = async () => {
+      const savedTheme = await AsyncStorage.getItem("theme") || "light";
+      if (savedTheme) {
+        setColorScheme(savedTheme as theme);
+      }
+    };
+    loadTheme();
+  }, []);
 
   if (!loaded) {
     return null;
