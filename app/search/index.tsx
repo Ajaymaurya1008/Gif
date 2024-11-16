@@ -16,7 +16,6 @@ export default function Search() {
   }, []);
 
   const getSearchResults = async ({ pageParam = 0 }) => {
-    console.log(searchText);
     const response = await api.get("/gifs/search", {
       params: {
         q: searchText,

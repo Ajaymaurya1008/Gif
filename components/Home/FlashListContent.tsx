@@ -45,7 +45,7 @@ export default function FlashListContent(props: FlashListContentProps) {
     });
   };
   return (
-    <View className="flex-1 w-full pt-6 px-6">
+    <View className="flex-1 w-full pt-6 px-6 pl-8">
       <FlashList
         data={allGifs}
         numColumns={2}
