@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Giphy",
-    "slug": "Giphy",
+    "name": "Gif",
+    "slug": "Gif",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/GIF.png",
@@ -16,7 +16,7 @@
         "foregroundImage": "./assets/images/GIF.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.ajaymaurya1008.Giphy"
+      "package": "com.ajaymaurya1008.Gif"
     },
     "web": {
       "bundler": "metro",
