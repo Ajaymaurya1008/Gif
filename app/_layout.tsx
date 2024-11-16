@@ -53,7 +53,7 @@ export default function RootLayout() {
           <Stack.Screen name="index" />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="gif/[id]" />
-          <Stack.Screen name="+not-found" />
+          <Stack.Screen name="search/index" options={{ headerShown: false }} />
         </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>
